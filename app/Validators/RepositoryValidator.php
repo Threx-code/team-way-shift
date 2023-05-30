@@ -11,12 +11,12 @@ class RepositoryValidator
      * @param $message
      * @return void
      */
-    public static function dataAlreadyExist($message): void
+    public static function dataAlreadyExist($errType, $message, $errorCode): void
     {
         $errorResponse = response()->json([
-            'error' => 'insertion error',
+            'error' => $errType .' error',
             'message' => $message,
-        ], 409);
+        ], $errorCode);
 
         self::throw($errorResponse);
     }

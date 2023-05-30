@@ -27,7 +27,7 @@ class WorkerRequest extends FormRequest
             'shift_date' => ['required'],
             'user_id' => ['required', 'integer'],
             'manager_id' => ['required', 'integer'],
-            'shift' => ['required',  Rule::in(ShiftTypes::SHIFTS)],
+            'shift_id' => ['required',  Rule::exists('shifts', 'id')],
         ];
     }
 }

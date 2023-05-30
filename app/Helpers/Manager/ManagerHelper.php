@@ -51,28 +51,24 @@ class ManagerHelper
     }
 
     /**
-     * @param $shiftDate
+     * @param $shiftManagerId
      * @param $userId
      * @return mixed
      */
-    public function shiftDateAlreadyCreatedForUser($shiftDate, $userId): mixed
+    public function shiftExistForUser($shiftManagerId, $userId): mixed
     {
-        return $this->shiftManager::where('user_id', $userId)->where(DB::raw("DATE(shift_date)"), $shiftDate)->first();
+        return $this->shiftManager::where(['user_id' => $userId, 'id' => $shiftManagerId])->first();
     }
 
     /**
+     * @param $shift
      * @param $shiftId
-     * @param $shiftDate
-     * @param $userid
-     * @return true
+     * @return bool
      */
-    public function updateShift($shiftId, $shiftDate, $userid): bool
+    public function updateShift($shift, $shiftId): bool
     {
-        $this->shiftManager->where(['user_id' => $userid, 'id' => $shiftId])
-            ->update([
-                'shift_date' => $shiftDate
-            ]);
-
+        $shift->shift_id = $shiftId;
+        $shift->save();
         return true;
     }
 

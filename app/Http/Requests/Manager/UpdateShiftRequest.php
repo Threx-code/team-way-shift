@@ -24,11 +24,9 @@ class UpdateShiftRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'shift_id' => ['required', Rule::exists('shift_managers', 'id')],
-            'shift_date' => ['required'],
+            'shift_manager_id' => ['required', Rule::exists('shift_managers', 'id')],
             'user_id' => ['required', 'integer'],
-            'manager_id' => ['required', 'integer'],
-            'shift' => ['required',  Rule::in(ShiftTypes::SHIFTS)],
+            'shift_id' => ['required',  Rule::exists('shifts', 'id')],
         ];
     }
 }

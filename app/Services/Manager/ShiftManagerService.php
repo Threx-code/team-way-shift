@@ -11,7 +11,6 @@ class ShiftManagerService implements ShiftManagerServiceInterface
 {
     public function __construct(private readonly ManagerHelper $helper){}
 
-
     /**
      * @param $request
      * @return array|null
@@ -21,7 +20,7 @@ class ShiftManagerService implements ShiftManagerServiceInterface
     {
         $shifts = $this->helper->shiftAlreadyCreated($request);
         if(!$shifts){
-            RepositoryValidator::dataAlreadyExist("shift dates already entered for this user");
+            RepositoryValidator::dataAlreadyExist("insertion", "shift dates already entered for this user", 409);
         }
         return ['shift_created' => $this->helper->createShift($shifts, $request->manager_id, $request->user_id)];
     }
@@ -32,11 +31,12 @@ class ShiftManagerService implements ShiftManagerServiceInterface
      */
     public function updateShift($request): ?array
     {
-        $shift = $this->helper->shiftDateAlreadyCreatedForUser($request->shift_date, $request->user_id);
-        if($shift){
-            RepositoryValidator::dataAlreadyExist("shift dates already created for this user");
+        $shift = $this->helper->shiftExistForUser($request->shift_manager_id, $request->user_id);
+        if(!$shift){
+            RepositoryValidator::dataAlreadyExist("update",
+                "Sorry you cannot update this shift because it does not exist for this user", 409);
         }
-        return  ['shift_updated' => $this->helper->updateShift($request->shift_id, $request->shift_date, $request->user_id)];
+        return  ['shift_updated' => $this->helper->updateShift($shift, $request->shift_id)];
     }
 
 
