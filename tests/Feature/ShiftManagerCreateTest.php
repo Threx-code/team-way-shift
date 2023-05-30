@@ -2,14 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Helpers\Helper;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ShiftManagerTest extends TestCase
+class ShiftManagerCreateTest extends TestCase
 {
     public function test_should_fail_when_no_parameter_is_provided()
     {
@@ -18,18 +17,10 @@ class ShiftManagerTest extends TestCase
             ->assertJson([
                 "message" => "The shift date field is required. (and 3 more errors)",
                 "errors" => [
-                    "shift_date" => [
-                        "The shift date field is required."
-                    ],
-                    "user_id" => [
-                        "The user id field is required."
-                    ],
-                    "manager_id" => [
-                        "The manager id field is required."
-                    ],
-                    "shift_id" => [
-                        "The shift id field is required."
-                    ]
+                    "shift_date" => ["The shift date field is required."],
+                    "user_id" => ["The user id field is required."],
+                    "manager_id" => ["The manager id field is required."],
+                    "shift_id" => ["The shift id field is required."]
                 ]
             ]);
     }
@@ -45,9 +36,7 @@ class ShiftManagerTest extends TestCase
             ->assertJson([
                 "message" =>  "The user id field is required.",
                 "errors" => [
-                    "user_id" => [
-                        "The user id field is required."
-                    ]
+                    "user_id" => ["The user id field is required."]
                 ]
             ]);
     }
@@ -63,9 +52,7 @@ class ShiftManagerTest extends TestCase
             ->assertJson([
                 "message" => "The manager id field is required.",
                 "errors" => [
-                    "manager_id" => [
-                        "The manager id field is required."
-                    ]
+                    "manager_id" => ["The manager id field is required."]
                 ]
             ]);
     }
@@ -81,9 +68,7 @@ class ShiftManagerTest extends TestCase
             ->assertJson([
                 "message" => "The shift id field is required.",
                 "errors" => [
-                    "shift_id" => [
-                        "The shift id field is required."
-                    ]
+                    "shift_id" => ["The shift id field is required."]
                 ]
             ]);
     }
@@ -100,9 +85,7 @@ class ShiftManagerTest extends TestCase
             ->assertJson([
                 "message" => "The selected shift id is invalid.",
                 "errors" => [
-                    "shift_id" => [
-                        "The selected shift id is invalid."
-                    ]
+                    "shift_id" => ["The selected shift id is invalid."]
                 ]
             ]);
     }
