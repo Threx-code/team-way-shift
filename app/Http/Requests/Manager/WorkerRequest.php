@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Manager;
 
+use App\Helpers\ShiftTypes;
 use App\Validators\ValidatorResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,10 +27,10 @@ class WorkerRequest extends FormRequest
     {
         return [
             'start_date' => ['required', 'date', 'before:end_date'],
-            'end_date' => ['required', 'date', 'after:start_date'],
+            'end_date' => ['nullable', 'date', 'after:start_date'],
             'user_id' => ['required', 'integer'],
             'manager_id' => ['required', 'integer'],
-            'shift' => ['required',  Rule::in(['morning', 'afternoon', 'evening'])],
+            'shift' => ['required',  Rule::in(ShiftTypes::SHIFTS)],
         ];
     }
 
@@ -39,6 +40,6 @@ class WorkerRequest extends FormRequest
      */
     public function failedValidation(Validator $validator): void
     {
-        ValidatorResponse::validationErrors($validator->errors());
+        ValidatorResponse::validationErrors($validator->errors(), 422);
     }
 }

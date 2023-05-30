@@ -7,15 +7,12 @@ class ValidatorResponse
 {
     /**
      * @param $error
+     * @param $code
      * @return void
      */
-    public static function validationErrors($error): void
+    public static function validationErrors($error, $code): void
     {
-        $errorResponse = response()->json([
-            'error' => 'The given data was invalid',
-            'message' => $error->first(),
-        ], 422);
-
+        $errorResponse = response()->json(['message' => $error->first()], $code);
         RepositoryValidator::throw($errorResponse);
     }
 }
