@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Manager;
 
 use App\Contracts\Manager\ShiftManagerInterface;
+use App\Http\Requests\Manager\WorkerRequest;
+use Illuminate\Http\JsonResponse;
 
 class ShiftManagerController
 {

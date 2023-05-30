@@ -205,6 +205,19 @@ class Helper
      */
     public function shiftAlreadyCreated($request)
     {
+        $endDate = $this->sevenDays($request->shift_date, $request->end_date);
+        $shift = $this->shiftManager::where('user_id', $request->user_id)->whereIn('shift_date', $request->shift_date)->first();
+        if($shift){
+            return ['status' => "This user shift has already been created for {$this->parseDate($shift->start_date)} to  {$this->parseDate($shift->end_date)}"];
+        }
+    }
+
+    /**
+     * @param $request
+     * @return string[]|void
+     */
+    public function shiftAlreadyExist($request)
+    {
         $endDate = $this->sevenDays($request->start_date, $request->end_date);
         $shift = $this->shiftManager::where('user_id', $request->user_id)->whereBetween('start_date', [$request->start_date, $endDate])->first();
         if($shift){

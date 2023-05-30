@@ -27,7 +27,6 @@ class WorkerRequest extends FormRequest
     {
         return [
             'start_date' => ['required', 'date', 'before:end_date'],
-            'end_date' => ['nullable', 'date', 'after:start_date'],
             'user_id' => ['required', 'integer'],
             'manager_id' => ['required', 'integer'],
             'shift' => ['required',  Rule::in(ShiftTypes::SHIFTS)],
