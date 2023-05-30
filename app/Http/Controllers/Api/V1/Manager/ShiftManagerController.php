@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Manager;
 
 use App\Contracts\Manager\ShiftManagerInterface;
+use App\Http\Requests\Manager\UpdateShiftRequest;
 use App\Http\Requests\Manager\WorkerRequest;
 use Illuminate\Http\JsonResponse;
 
@@ -14,10 +15,18 @@ class ShiftManagerController
      * @param WorkerRequest $request
      * @return JsonResponse
      */
-    public function shiftManager(WorkerRequest $request): JsonResponse
+    public function createShift(WorkerRequest $request): JsonResponse
     {
-        return response()->json($this->repository->shiftManager($request));
+        return response()->json($this->repository->createShift($request));
     }
+
+    public function updateShift(UpdateShiftRequest $request): JsonResponse
+    {
+        return response()->json($this->repository->updateShift($request));
+    }
+
+
+
 
 
 }

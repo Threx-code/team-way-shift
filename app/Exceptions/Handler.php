@@ -47,4 +47,18 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     * @param $request
+     * @param Throwable $e
+     * @return bool
+     */
+    public function shouldReturnJson($request, Throwable $e): bool
+    {
+        if($request->is('api/*')){
+            return true;
+        }
+
+        return $request->expectsJson();
+    }
 }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('manager_id');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->date('shift_date');
+            $table->unsignedBigInteger('shift_id');
             $table->timestamps();
         });
     }

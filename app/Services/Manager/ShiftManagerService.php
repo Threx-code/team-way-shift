@@ -3,27 +3,41 @@
 namespace App\Services\Manager;
 
 use App\Contracts\Manager\ShiftManagerServiceInterface;
-use App\Helpers\Helper;
+use App\Helpers\Manager\ManagerHelper;
 use App\Validators\RepositoryValidator;
-use Carbon\Carbon;
+use JsonException;
 
 class ShiftManagerService implements ShiftManagerServiceInterface
 {
-    public function __construct(private readonly Helper $helper){}
+    public function __construct(private readonly ManagerHelper $helper){}
 
 
     /**
      * @param $request
-     * @param array $shifts
-     * @return bool[]|string[]|null
+     * @return array|null
+     * @throws JsonException
      */
-    public function shiftManager($request, array $shifts = []): ?array
+    public function createShift($request): ?array
     {
         $shifts = $this->helper->shiftAlreadyCreated($request);
         if(!$shifts){
-            $shifts = $this->helper->shiftManager($request);
+            RepositoryValidator::dataAlreadyExist("shift dates already entered for this user");
         }
-        return $shifts;
-
+        return ['shift_created' => $this->helper->createShift($shifts, $request->manager_id, $request->user_id)];
     }
+
+    /**
+     * @param $request
+     * @return array|null
+     */
+    public function updateShift($request): ?array
+    {
+        $shift = $this->helper->shiftDateAlreadyCreatedForUser($request->shift_date, $request->user_id);
+        if($shift){
+            RepositoryValidator::dataAlreadyExist("shift dates already created for this user");
+        }
+        return  ['shift_updated' => $this->helper->updateShift($request->shift_id, $request->shift_date, $request->user_id)];
+    }
+
+
 }

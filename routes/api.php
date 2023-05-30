@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware([])->name('api')->group(function () {
-    Route::middleware([])->prefix("shift/admin")->group(function () {
-        Route::post('manager', [ShiftManagerController::class, 'shiftManager'])->name('shift.manager');
+    Route::middleware([])->prefix("shift/manager")->group(function () {
+        Route::post('create', [ShiftManagerController::class, 'createShift'])->name('shift.create');
+        Route::put('update', [ShiftManagerController::class, 'updateShift'])->name('shift.update');
     });
 
     Route::prefix('worker/shift')->group(function () {

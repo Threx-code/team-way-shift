@@ -4,6 +4,7 @@ namespace App\Repositories\Manager;
 
 use App\Contracts\Manager\ShiftManagerInterface;
 use App\Contracts\Manager\ShiftManagerServiceInterface;
+use JsonException;
 
 class ShiftManagerRepository implements ShiftManagerInterface
 {
@@ -11,11 +12,23 @@ class ShiftManagerRepository implements ShiftManagerInterface
 
     /**
      * @param $request
-     * @return bool[]|string[]|null
+     * @return array|null
+     * @throws JsonException
      */
-    public function shiftManager($request): ?array
+    public function createShift($request): ?array
     {
-        return $this->service->shiftManager($request);
+        return $this->service->createShift($request);
     }
+
+    /**
+     * @param $request
+     * @return array|null
+     */
+    public function updateShift($request): ?array
+    {
+        return $this->service->updateShift($request);
+    }
+
+
 
 }

@@ -46,7 +46,7 @@ class RepositoryValidator
         $errorResponse = response()->json([
             'error' => 'Daily Work Limit Reached',
             'message' => $message,
-        ], 422);
+        ], 200);
 
         self::throw($errorResponse);
     }
@@ -61,19 +61,11 @@ class RepositoryValidator
         $errorResponse = response()->json([
             'error' => 'Something went wrong',
             'message' => $message,
-        ], 422);
+        ], 200);
 
         self::throw($errorResponse);
     }
 
-    /**
-     * @param $var
-     * @return mixed
-     */
-    public static function sanitizeString($var): mixed
-    {
-        return filter_var(strip_tags(stripslashes($var)), FILTER_SANITIZE_STRING);
-    }
 
     /**
      * @param $error
