@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([])->name('api')->group(function () {
     Route::middleware([])->prefix("shift/manager")->group(function () {
-        Route::post('create', [ShiftManagerController::class, 'createShift'])->name('shift.create');
-        Route::put('update', [ShiftManagerController::class, 'updateShift'])->name('shift.update');
+        Route::post('create', [ShiftManagerController::class, 'createShift'])->name('.shift.create');
+        Route::put('update', [ShiftManagerController::class, 'updateShift'])->name('.shift.update');
     });
 
     Route::prefix('worker/shift')->group(function () {
-        Route::post('daily-roster', [WorkerShiftController::class, 'dailyRoster'])->name('shift.daily-roster');
-        Route::post("clock-in", [WorkerShiftController::class, 'workerClockIn'])->name('shift.clock-in');
-        Route::post('clock-out', [WorkerShiftController::class, 'workerClockOut'])->name('shift.clock-out');
-        Route::post('work-days', [WorkerShiftController::class, 'listOfAllShiftForAWorker'])->name('shift.work-days');
+        Route::post('daily-roster', [WorkerShiftController::class, 'dailyRoster'])->name('.shift.daily-roster');
+        Route::post("clock-in", [WorkerShiftController::class, 'workerClockIn'])->name('.shift.clock-in');
+        Route::post('clock-out', [WorkerShiftController::class, 'workerClockOut'])->name('.shift.clock-out');
+        Route::post('work-days', [WorkerShiftController::class, 'listOfAllShiftForAWorker'])->name('.shift.work-days');
     });
 });

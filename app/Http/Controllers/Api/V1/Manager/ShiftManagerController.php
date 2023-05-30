@@ -6,6 +6,7 @@ use App\Contracts\Manager\ShiftManagerInterface;
 use App\Http\Requests\Manager\UpdateShiftRequest;
 use App\Http\Requests\Manager\WorkerRequest;
 use Illuminate\Http\JsonResponse;
+use JsonException;
 
 class ShiftManagerController
 {
@@ -14,6 +15,7 @@ class ShiftManagerController
     /**
      * @param WorkerRequest $request
      * @return JsonResponse
+     * @throws JsonException
      */
     public function createShift(WorkerRequest $request): JsonResponse
     {

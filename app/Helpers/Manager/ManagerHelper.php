@@ -31,7 +31,7 @@ class ManagerHelper
      * @param $userId
      * @return bool
      */
-    public function createShift($dates, $mangerId, $userId)
+    public function createShift($dates, $mangerId, $userId, $shiftId)
     {
         $inserts = [];
         $response = false;
@@ -42,6 +42,7 @@ class ManagerHelper
            $inserts[$key]['shift_date'] = $date;
            $inserts[$key]['created_at'] = Carbon::now();
            $inserts[$key]['updated_at'] = Carbon::now();
+           $inserts[$key]['shift_id'] = $shiftId;
        }
 
         if($this->shiftManager->insert($inserts)){

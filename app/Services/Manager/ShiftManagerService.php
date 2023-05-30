@@ -22,7 +22,7 @@ class ShiftManagerService implements ShiftManagerServiceInterface
         if(!$shifts){
             RepositoryValidator::dataAlreadyExist("insertion", "shift dates already entered for this user", 409);
         }
-        return ['shift_created' => $this->helper->createShift($shifts, $request->manager_id, $request->user_id)];
+        return ['shift_created' => $this->helper->createShift($shifts, $request->manager_id, $request->user_id, $request->shift_id)];
     }
 
     /**
