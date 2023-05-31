@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Workers;
 
-use App\Validators\ValidatorResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,15 +24,7 @@ class DailyRosterRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'integer'],
+            "date" => ["nullable", "date"],
         ];
-    }
-
-    /**
-     * @param Validator $validator
-     * @return void
-     */
-    public function failedValidation(Validator $validator): void
-    {
-        ValidatorResponse::validationErrors($validator->errors());
     }
 }

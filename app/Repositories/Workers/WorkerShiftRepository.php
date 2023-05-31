@@ -3,30 +3,21 @@
 namespace App\Repositories\Workers;
 
 use App\Contracts\Workers\WorkerShiftInterface;
+use App\Contracts\Workers\WorkShiftServiceInterface;
 
 
 class WorkerShiftRepository implements WorkerShiftInterface
 {
-    public function __construct(private readonly  WorkerShiftInterface $service){
+    public function __construct(private readonly  WorkShiftServiceInterface $service){
     }
 
     /**
      * @param $request
-     * @return bool[]|null
+     * @return mixed
      */
-    public function workerClockIn($request): ?array
+    public function dailyRoster($request): mixed
     {
-        return $this->service->workerClockIn($request);
-    }
-
-
-    /**
-     * @param $request
-     * @return bool[]|null
-     */
-    public function workerClockOut($request): ?array
-    {
-        return $this->service->workerClockOut($request);
+        return $this->service->dailyRoster($request);
     }
 
     /**
@@ -38,21 +29,6 @@ class WorkerShiftRepository implements WorkerShiftInterface
         return $this->service->listOfAllShiftForAWorker($request);
     }
 
-    /**
-     * @param $request
-     * @return bool[]|string[]|null
-     */
-    public function shiftManager($request): ?array
-    {
-        return $this->service->shiftManager($request);
-    }
 
-    /**
-     * @param $request
-     * @return bool[]|string[]|null
-     */
-    public function dailyRoster($request): ?array
-    {
-        return $this->service->dailyRoster($request);
-    }
+
 }

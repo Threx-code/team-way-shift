@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Workers;
 
-use App\Validators\ValidatorResponse;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\RequiredIf;
@@ -44,12 +42,4 @@ class WorkerClockAllShiftRequest extends FormRequest
         ];
     }
 
-    /**
-     * @param Validator $validator
-     * @return void
-     */
-    public function failedValidation(Validator $validator): void
-    {
-        ValidatorResponse::validationErrors($validator->errors());
-    }
 }

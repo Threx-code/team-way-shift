@@ -29,9 +29,10 @@ class ManagerHelper
      * @param $dates
      * @param $mangerId
      * @param $userId
+     * @param $shiftId
      * @return bool
      */
-    public function createShift($dates, $mangerId, $userId, $shiftId)
+    public function createShift($dates, $mangerId, $userId, $shiftId): bool
     {
         $inserts = [];
         $response = false;
