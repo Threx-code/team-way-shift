@@ -24,5 +24,6 @@ Route::middleware([])->name('api')->group(function () {
     Route::prefix('worker/shift')->group(function () {
         Route::post('daily-roster', [WorkerShiftController::class, 'dailyRoster'])->name('.shift.daily-roster');
         Route::post('work-days', [WorkerShiftController::class, 'listOfAllShiftForAWorker'])->name('.shift.work-days');
+        Route::post('collection', [WorkerShiftController::class, 'collection'])->name('.shift.collection');
     });
 });

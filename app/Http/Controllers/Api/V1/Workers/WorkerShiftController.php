@@ -19,7 +19,7 @@ class WorkerShiftController extends Controller
      */
     public function dailyRoster(DailyRosterRequest $request): JsonResponse
     {
-        return response()->json(DailyRosterTransformer::trnaform($this->repository->dailyRoster($request)));
+        return response()->json(DailyRosterTransformer::transform($this->repository->dailyRoster($request)));
     }
 
     /**

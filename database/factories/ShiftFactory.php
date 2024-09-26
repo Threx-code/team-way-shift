@@ -2,12 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Helpers\ShiftTypes;
+use App\Models\Shift;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\WorkerShift>
+ * @extends Factory<Shift>
  */
-class WorkerShiftFactory extends Factory
+class ShiftFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +19,7 @@ class WorkerShiftFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->randomElement(ShiftTypes::SHIFTS),
         ];
     }
 }
